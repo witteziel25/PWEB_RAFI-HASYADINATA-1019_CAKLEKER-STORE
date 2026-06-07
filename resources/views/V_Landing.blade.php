@@ -1,5 +1,6 @@
 @extends('layouts.V_Layout')
 @section('title', 'Selamat Datang')
+@section('hide_header_footer', true)
 
 @push('styles')
 <style>
@@ -129,7 +130,7 @@
         background-color: rgba(225, 6, 0, 0.1);
         color: #e10600;
     }
-    
+
     .bubble-2 {
         top: 45%;
         right: 10%;
@@ -170,7 +171,7 @@
 
 @section('content')
 <div class="landing-split-container">
-    
+
     <!-- Left Side: Copywriting -->
     <div class="landing-content-side">
         <div class="mx-auto mx-lg-0" style="max-width: 500px;">
@@ -191,7 +192,7 @@
                     Daftar
                 </a>
             </div>
-            
+
             <div class="mt-5 pt-4 border-top border-secondary border-opacity-10 d-flex align-items-center gap-4">
                 <div>
                     <div class="text-dark fw-bolder fs-3">50+</div>
@@ -209,7 +210,7 @@
     <div class="landing-image-side d-none d-lg-flex">
         <div class="landing-image-overlay"></div>
         <div class="bubble-container">
-            
+
             <div class="chat-bubble bubble-4">
                 <i class="bi bi-clock-history me-2"></i> Sesi Penawaran Berakhir: 14:59:00
             </div>

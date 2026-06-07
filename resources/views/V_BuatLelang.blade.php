@@ -139,9 +139,14 @@
                     
                     <div class="mb-3">
                         <label class="form-label text-dark fw-bold small">Titik Lokasi Pertemuan</label>
-                        <div class="input-group custom-input-group mb-2">
-                            <span class="input-group-text text-danger"><i class="bi bi-geo-alt-fill"></i></span>
-                            <input type="text" id="titik_pertemuan" name="titik_pertemuan" class="form-control" placeholder="Ketik alamat atau nama tempat..." value="{{ old('titik_pertemuan') }}" required>
+                        <div class="d-flex gap-2 mb-2">
+                            <div class="input-group custom-input-group flex-grow-1">
+                                <span class="input-group-text text-danger"><i class="bi bi-geo-alt-fill"></i></span>
+                                <input type="text" id="titik_pertemuan" name="titik_pertemuan" class="form-control" placeholder="Ketik alamat atau nama tempat..." value="{{ old('titik_pertemuan') }}" required>
+                            </div>
+                            <button class="btn btn-danger px-3 rounded" type="button" id="btnCariLokasi" title="Cari Lokasi">
+                                <i class="bi bi-search"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -184,12 +189,18 @@
         
         marker = L.marker(defaultLoc, { draggable: true }).addTo(map);
         
+        const btnCari = document.getElementById("btnCariLokasi");
         const input = document.getElementById("titik_pertemuan");
         
-        // Pencarian Lokasi dengan Nominatim saat input enter/lepas fokus
-        input.addEventListener('change', function() {
-            let query = this.value;
+        function cariLokasi() {
+            let query = input.value;
             if (query.trim() === '') return;
+            
+            // Tambahkan loading state pada tombol
+            const originalText = btnCari.innerHTML;
+            btnCari.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+            btnCari.disabled = true;
+
             fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`)
                 .then(response => response.json())
                 .then(data => {
@@ -202,7 +213,20 @@
                         alert('Lokasi tidak ditemukan');
                     }
                 })
-                .catch(err => console.error(err));
+                .catch(err => console.error(err))
+                .finally(() => {
+                    btnCari.innerHTML = originalText;
+                    btnCari.disabled = false;
+                });
+        }
+        
+        // Pencarian Lokasi dengan Nominatim saat tombol ditekan atau enter
+        btnCari.addEventListener('click', cariLokasi);
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                cariLokasi();
+            }
         });
         
         // Reverse Geocoding saat marker digeser
@@ -266,9 +290,18 @@
             const previewContainer = document.getElementById('filePreview');
             previewContainer.innerHTML = '';
             
-            // Tambahkan file baru ke dt
+            // Tambahkan file baru ke dt jika belum ada
             for (let i = 0; i < e.target.files.length; i++) {
-                dt.items.add(e.target.files[i]);
+                let isExist = false;
+                for (let j = 0; j < dt.items.length; j++) {
+                    if (e.target.files[i].name === dt.files[j].name && e.target.files[i].size === dt.files[j].size) {
+                        isExist = true;
+                        break;
+                    }
+                }
+                if (!isExist) {
+                    dt.items.add(e.target.files[i]);
+                }
             }
             
             // Perbarui file input dengan list file yang terakumulasi

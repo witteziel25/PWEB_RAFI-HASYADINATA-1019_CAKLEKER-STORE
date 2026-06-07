@@ -1,5 +1,6 @@
 @extends('layouts.V_Layout')
 @section('title', 'Verifikasi Kode OTP')
+@section('hide_header_footer', true)
 
 @push('styles')
 <style>

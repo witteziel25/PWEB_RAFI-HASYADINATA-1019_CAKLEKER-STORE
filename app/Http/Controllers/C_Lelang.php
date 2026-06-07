@@ -72,10 +72,11 @@ class C_Lelang extends Controller
             'waktu_berakhir' => 'required|date|after:waktu_mulai',
             'titik_pertemuan' => 'required|string',
             'foto' => 'required|array',
-            'foto.*' => 'image|max:2048',
+            'foto.*' => 'file|mimes:jpeg,png,jpg,gif,svg,webp,avif|max:2048',
         ], [
             'foto.*.max' => 'Salah satu ukuran foto mobil melebihi 2 MB. Harap perkecil ukuran foto.',
-            'foto.*.image' => 'File yang diunggah harus berupa gambar.',
+            'foto.*.mimes' => 'File yang diunggah harus berupa gambar yang valid (JPG, PNG, GIF, WEBP, AVIF).',
+            'foto.*.file' => 'Gagal mengunggah file foto.',
         ]);
 
         $lelang = M_Lelang::create([

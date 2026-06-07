@@ -1,5 +1,6 @@
 @extends('layouts.V_Layout')
 @section('title', 'Ubah Sandi')
+@section('hide_header_footer', true)
 
 @push('styles')
 <style>

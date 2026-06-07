@@ -23,6 +23,7 @@
 <body class="d-flex flex-column min-vh-100">
 
     {{-- Navbar hanya untuk user yang sudah login --}}
+    @if(!View::hasSection('hide_header_footer'))
     @auth
     <nav class="navbar navbar-expand-lg sticky-top glass-navbar shadow-sm">
         <div class="container">
@@ -93,13 +94,15 @@
         </div>
     </nav>
     @endauth
+    @endif
 
     {{-- Main Content --}}
-    <main class="flex-grow-1 @auth pt-5 @else pt-0 @endauth">
+    <main class="flex-grow-1 @if(!View::hasSection('hide_header_footer') && Auth::check()) pt-5 @else pt-0 @endif">
         @yield('content')
     </main>
 
     {{-- Footer Terkunci Hitam Pekat Konsisten --}}
+    @if(!View::hasSection('hide_header_footer'))
     @auth
     <footer class="footer mt-auto py-5">
         <div class="container">
@@ -142,6 +145,7 @@
         </div>
     </footer>
     @endauth
+    @endif
 
     {{-- Global Image Lightbox Modal --}}
     <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
