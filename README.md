@@ -1,58 +1,58 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Cakleker Auction
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Cakleker Auction Banner](https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=1200&q=80)
 
-## About Laravel
+**Cakleker Auction** adalah platform lelang mobil *supercar* berbasis web profesional. Dirancang dengan mengedepankan keamanan transaksi, pengalaman pengguna (UI/UX) yang modern, dan performa tinggi. Aplikasi ini memungkinkan kolektor untuk mencari dan menawar (*bidding*) mobil impian mereka, atau bahkan mendaftar sebagai penjual untuk melelang koleksi pribadinya.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Fitur Unggulan
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. **Sistem Otentikasi & Keamanan Ketat**
+   - Registrasi pengguna baru.
+   - Verifikasi email via OTP (One-Time Password) 6-digit.
+   - Login dengan validasi kredensial (Hanya *Username* & Kata Sandi).
+   - Pemulihan akun (Lupa Kata Sandi) melalui *email reset link*.
 
-## Learning Laravel
+2. **Manajemen Akun Terintegrasi**
+   - Pengaturan informasi profil pribadi.
+   - Pengunggahan foto profil dengan optimisasi gambar otomatis.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+3. **Dasbor Penjual (Lelang Pribadi)**
+   - Form pembuatan lelang yang interaktif (Judul, Harga Awal, Titik Lokasi COD, Rentang Waktu Pelaksanaan).
+   - Editor Teks Kaya (Rich Text/CKEditor) untuk penulisan spesifikasi kendaraan.
+   - Unggah hingga maksimal 5 lembar foto pameran mobil.
+   - Pemantauan tawaran aktif secara langsung.
+   - Manajemen riwayat lelang yang telah usai (Terjual / Tidak Terjual).
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. **Sistem Penawaran (Bidding System)**
+   - Daftar Lelang Umum yang menampilkan seluruh lelang yang sedang berlangsung.
+   - Validasi angka *bidding* agar tawaran selalu melampaui harga puncak saat ini.
+   - Format mata uang Rupiah dinamis saat mengetik angka nominal tawaran.
+   - Detail informasi kontak pemenang di sesi pelelangan yang sukses diselesaikan.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+5. **Pengalaman Antarmuka yang Nyaman**
+   - Mode Gelap / Mode Terang (*Dark/Light Mode Toggle*) di seluruh platform web.
+   - Kartu daftar lelang yang rapi dengan efek interaktif.
 
-## Agentic Development
+6. **Optimisasi Sisi Server**
+   - Konversi dan kompresi file gambar yang diunggah ke format `WebP` berkualitas tinggi menggunakan pustaka *Intervention Image*, untuk kecepatan memuat data halaman.
+   - Pembatasan batas kapasitas berkas unggah maksimal 2 MB per foto.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
-```bash
-composer require laravel/boost --dev
+## Tech Stack
 
-php artisan boost:install
-```
+Aplikasi ini dibangun menggunakan beberapa teknologi berikut:
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+- **Bahasa Pemrograman**: PHP (v8.2+)
+- **Kerangka Kerja (Backend)**: [Laravel 11.x](https://laravel.com/)
+- **Kerangka Kerja (Frontend)**: [Bootstrap 5.3](https://getbootstrap.com/)
+- **Mesin Tampilan**: Blade Template Engine
+- **Basis Data**: MySQL
+- **Pengolah Gambar**: [Intervention Image v4](https://image.intervention.io/)
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 📜 Lisensi
+Aplikasi ini dibangun menggunakan kerangka kerja [Laravel](https://laravel.com/docs/11.x/license). Lisensi proyek ini tunduk pada Lisensi MIT (MIT License). Anda bebas memodifikasi, dan menggunakan kembali kerangka sumber kode dalam platform ini.
