@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="col-md-3 col-6 text-md-center mt-3 mt-md-0">
                                     <span class="text-muted d-block small">Waktu Pelaksanaan</span>
-                                    <span class="small fw-medium text-dark">{{ \Carbon\Carbon::parse($lelang->waktu_mulai)->translatedFormat('d M Y, H:i') }} - {{ \Carbon\Carbon::parse($lelang->waktu_berakhir)->translatedFormat('d M Y, H:i') }}</span>
+                                    <span class="small fw-medium text-dark">{{ \Carbon\Carbon::parse($lelang->waktu_mulai)->translatedFormat('d M Y, H:i') }} WIB - {{ \Carbon\Carbon::parse($lelang->waktu_berakhir)->translatedFormat('d M Y, H:i') }} WIB</span>
                                 </div>
                                 <div class="col-md-2 col-12 text-md-end mt-3 mt-md-0">
                                     @if($lelang->penawaran()->count() == 0 && $lelang->waktu_berakhir > now())
@@ -188,7 +188,7 @@
                                 </div>
                                 <div class="col-md-5 col-6 text-md-end mt-3 mt-md-0">
                                     <span class="text-muted d-block small">Waktu Pelaksanaan</span>
-                                    <span class="small fw-medium text-dark">{{ \Carbon\Carbon::parse($lelang->waktu_mulai)->translatedFormat('d M Y, H:i') }} - {{ \Carbon\Carbon::parse($lelang->waktu_berakhir)->translatedFormat('d M Y, H:i') }}</span>
+                                    <span class="small fw-medium text-dark">{{ \Carbon\Carbon::parse($lelang->waktu_mulai)->translatedFormat('d M Y, H:i') }} WIB - {{ \Carbon\Carbon::parse($lelang->waktu_berakhir)->translatedFormat('d M Y, H:i') }} WIB</span>
                                 </div>
                             </div>
                         </div>

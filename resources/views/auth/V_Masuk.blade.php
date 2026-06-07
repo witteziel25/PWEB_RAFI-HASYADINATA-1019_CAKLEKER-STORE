@@ -288,7 +288,7 @@
             <form method="POST" action="{{ route('masuk') }}">
                 @csrf
                 <div class="clean-input-group">
-                    <input type="text" class="clean-input @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username') }}" placeholder="Nomor ponsel, nama pengguna, atau email" required autofocus>
+                    <input type="text" class="clean-input @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username') }}" placeholder="Nama Pengguna (Username)" required autofocus>
                     @error('username') <div class="invalid-feedback d-block mt-1 small">{{ $message }}</div> @enderror
                 </div>
 
@@ -306,6 +306,10 @@
                     </div>
                 @endif
 
+                <div class="text-end mb-3 mt-1">
+                    <a href="{{ route('lupa.password') }}" class="text-danger small fw-semibold text-decoration-none">Lupa kata sandi?</a>
+                </div>
+
                 <button type="submit" class="btn btn-danger w-100 py-3 fw-bold rounded-pill btn-auth mt-2">
                     Masuk Sekarang
                 </button>
@@ -313,7 +317,7 @@
 
             <div class="text-center mt-5">
                 <span class="text-secondary small d-block mb-3">Belum punya akun? <a href="{{ route('daftar') }}" class="text-decoration-none fw-bold text-danger ms-1">Daftar sekarang</a></span>
-                <a href="{{ url('/') }}" class="text-decoration-none fw-semibold text-secondary small"><i class="bi bi-arrow-left me-1"></i> Kembali ke Beranda</a>
+                <a href="{{ url('/') }}" class="text-decoration-none fw-semibold text-secondary small"><i class="bi bi-arrow-left me-1"></i> Kembali ke Landing Page</a>
             </div>
             
             <div class="text-center mt-4 pt-3 border-top border-light-subtle">

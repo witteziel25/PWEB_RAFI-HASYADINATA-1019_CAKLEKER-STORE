@@ -65,16 +65,18 @@ class C_Akun extends Controller
     // Proses Masuk
     public function masuk(Request $req)
     {
-        $creds = $req->validate([
+        $req->validate([
             'username' => 'required',
             'password' => 'required',
         ]);
 
-        if (Auth::attempt(['username' => $creds['username'], 'password' => $creds['password']])) {
-            return redirect()->route('lelang.umum')->with('success', 'Berhasil masuk ke Akun!');
+        if (Auth::attempt(['username' => $req->username, 'password' => $req->password])) {
+            $req->session()->regenerate();
+
+            return redirect()->intended('/lelang-umum')->with('success', 'Berhasil masuk ke aplikasi.');
         }
 
-        return back()->withErrors(['login' => 'Nama pengguna atau kata sandi salah']);
+        return back()->withErrors(['login' => 'Username atau password yang Anda masukkan salah!'])->withInput();
     }
 
     // Logout

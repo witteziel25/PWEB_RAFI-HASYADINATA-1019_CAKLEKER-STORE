@@ -14,11 +14,11 @@ Route::post('/masuk', [C_Akun::class, 'masuk']);
 
 // Lupa Password
 Route::get('/lupa-password', [C_Akun::class, 'formLupaPassword'])->name('lupa.password');
-Route::post('/lupa-password', [C_Akun::class, 'kirimOTP']);
+Route::post('/lupa-password', [C_Akun::class, 'kirimOTP'])->name('lupa.password.submit');
 Route::get('/verifikasi-otp', [C_Akun::class, 'formVerifikasiOTP'])->name('verifikasi.otp');
-Route::post('/verifikasi-otp', [C_Akun::class, 'verifikasiOTP']);
+Route::post('/verifikasi-otp', [C_Akun::class, 'verifikasiOTP'])->name('verifikasi.otp.submit');
 Route::get('/ubah-password', [C_Akun::class, 'formUbahPassword'])->name('ubah.password');
-Route::post('/ubah-password', [C_Akun::class, 'ubahPassword']);
+Route::post('/ubah-password', [C_Akun::class, 'ubahPassword'])->name('ubah.password.submit');
 
 // Group dengan middleware login
 Route::middleware(['cekLogin'])->group(function () {

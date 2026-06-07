@@ -265,7 +265,7 @@
 
             <div class="text-center mt-4">
                 <span class="text-secondary small d-block mb-3">Punya akun? <a href="{{ route('masuk') }}" class="text-decoration-none fw-bold text-danger ms-1">Masuk Sesi</a></span>
-                <a href="{{ url('/') }}" class="text-decoration-none fw-semibold text-secondary small"><i class="bi bi-arrow-left me-1"></i> Kembali ke Beranda</a>
+                <a href="{{ url('/') }}" class="text-decoration-none fw-semibold text-secondary small"><i class="bi bi-arrow-left me-1"></i> Kembali ke Landing Page</a>
             </div>
             
             <div class="text-center mt-4 pt-3 border-top border-light-subtle">

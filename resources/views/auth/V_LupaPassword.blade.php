@@ -246,7 +246,7 @@
                     @error('email') <div class="invalid-feedback d-block mt-1 small">{{ $message }}</div> @enderror
                 </div>
 
-                <button type="submit" class="btn-auth-submit mt-3">Kirim Tautan Reset</button>
+                <button type="submit" class="btn-auth-submit mt-3">Kirim Kode OTP</button>
             </form>
 
             <div class="text-center mt-5">
