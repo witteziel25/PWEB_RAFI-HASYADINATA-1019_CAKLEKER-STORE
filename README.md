@@ -1,8 +1,6 @@
 # Cakleker Auction
 
-![Cakleker Auction Banner](https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=1200&q=80)
-
-**Cakleker Auction** adalah platform lelang mobil *supercar* berbasis web profesional. Dirancang dengan mengedepankan keamanan transaksi, pengalaman pengguna (UI/UX) yang modern, dan performa tinggi. Aplikasi ini memungkinkan kolektor untuk mencari dan menawar (*bidding*) mobil impian mereka, atau bahkan mendaftar sebagai penjual untuk melelang koleksi pribadinya.
+**Cakleker Auction** adalah platform lelang mobil *supercar* berbasis web profesional. Aplikasi ini memungkinkan kolektor untuk mencari dan menawar (*bidding*) mobil impian mereka, atau bahkan mendaftar sebagai penjual untuk melelang koleksi pribadinya.
 
 ---
 
