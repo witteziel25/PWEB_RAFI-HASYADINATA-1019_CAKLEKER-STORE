@@ -210,6 +210,12 @@ body.dark-mode .custom-input-group .form-control {
     color: #ffffff !important;
 }
 
+/* Penyelarasan Dropdown Active (Agar tidak biru) */
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #475569 !important;
+    color: #ffffff !important;
+}
+
 .custom-switch-group {
     border-radius: 30px !important;
 }

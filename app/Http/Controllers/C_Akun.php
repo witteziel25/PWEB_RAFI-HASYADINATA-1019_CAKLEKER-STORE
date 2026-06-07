@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Encoders\WebpEncoder;
+use Intervention\Image\ImageManager;
 
 class C_Akun extends Controller
 {
@@ -173,7 +178,10 @@ class C_Akun extends Controller
         if ($req->filled('password')) {
             $rules['password'] = 'required|min:8|confirmed';
         }
-        $req->validate($rules);
+        $req->validate($rules, [
+            'foto_profil.max' => 'Ukuran foto profil tidak boleh lebih dari 2 MB.',
+            'foto_profil.image' => 'File yang diunggah harus berupa gambar.',
+        ]);
 
         $user->email = $req->email;
         $user->nama_lengkap = $req->nama_lengkap;
@@ -182,9 +190,13 @@ class C_Akun extends Controller
             $user->password = Hash::make($req->password);
         }
         if ($req->hasFile('foto_profil')) {
-            $file = $req->file('foto_profil');
-            $path = $file->store('foto_profil', 'public');
-            $user->foto_profil = $path;
+            $manager = new ImageManager(new Driver);
+            $image = $manager->decodePath($req->file('foto_profil')->getPathname());
+            $encoded = $image->encode(new WebpEncoder(quality: 85));
+            $filename = 'foto_profil/'.Str::random(40).'.webp';
+
+            Storage::disk('public')->put($filename, $encoded->toString());
+            $user->foto_profil = $filename;
         }
         $user->save();
 

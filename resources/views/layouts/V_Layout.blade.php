@@ -54,7 +54,11 @@
 
                     <div class="dropdown">
                         <a class="btn btn-outline-dark dropdown-toggle rounded-pill px-3 fw-semibold d-flex align-items-center gap-2" href="#" role="button" id="dropdownAkun" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle fs-5"></i>
+                            @if(Auth::user()->foto_profil)
+                                <img src="{{ Storage::url(Auth::user()->foto_profil) }}" alt="Profil" class="rounded-circle" style="width: 24px; height: 24px; object-fit: cover;">
+                            @else
+                                <i class="bi bi-person-circle fs-5"></i>
+                            @endif
                             <span>{{ Auth::user()->nama_lengkap ?? Auth::user()->username }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-3 mt-2" aria-labelledby="dropdownAkun">
@@ -68,7 +72,7 @@
 
                             <li>
                                 <a class="dropdown-item fw-medium d-flex align-items-center gap-2 py-2 {{ Request::routeIs('akun') ? 'active text-white' : '' }}" href="{{ route('akun') }}">
-                                    <i class="bi bi-person-gear fs-5 text-secondary"></i> Akun Saya
+                                    <i class="bi bi-person-gear fs-5 {{ Request::routeIs('akun') ? '' : 'text-secondary' }}"></i> Akun Saya
                                 </a>
                             </li>
 

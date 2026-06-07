@@ -9,7 +9,14 @@
         </div>
         
         {{-- Username Penjual --}}
-        <p class="text-muted small mb-3"><i class="bi bi-person-circle me-1"></i> Penjual: <span class="fw-bold">{{ $lelang->penjual->username }}</span></p>
+        <p class="text-muted small mb-3 d-flex align-items-center gap-1">
+            @if($lelang->penjual->foto_profil)
+                <img src="{{ Storage::url($lelang->penjual->foto_profil) }}" alt="Profil" class="rounded-circle" style="width: 20px; height: 20px; object-fit: cover;">
+            @else
+                <i class="bi bi-person-circle"></i>
+            @endif
+            Penjual: <span class="fw-bold">{{ $lelang->penjual->username }}</span>
+        </p>
 
         {{-- Grid Foto --}}
         <div class="row g-2 mb-3">

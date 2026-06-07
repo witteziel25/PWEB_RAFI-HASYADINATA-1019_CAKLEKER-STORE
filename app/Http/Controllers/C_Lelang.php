@@ -6,6 +6,11 @@ use App\Models\M_FotoLelang;
 use App\Models\M_Lelang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Encoders\WebpEncoder;
+use Intervention\Image\ImageManager;
 
 class C_Lelang extends Controller
 {
@@ -68,6 +73,9 @@ class C_Lelang extends Controller
             'titik_pertemuan' => 'required|string',
             'foto' => 'required|array',
             'foto.*' => 'image|max:2048',
+        ], [
+            'foto.*.max' => 'Salah satu ukuran foto mobil melebihi 2 MB. Harap perkecil ukuran foto.',
+            'foto.*.image' => 'File yang diunggah harus berupa gambar.',
         ]);
 
         $lelang = M_Lelang::create([
@@ -81,12 +89,19 @@ class C_Lelang extends Controller
             'is_active' => true,
         ]);
 
-        // Upload banyak foto
+        $manager = new ImageManager(new Driver);
+
+        // Upload banyak foto dengan konversi ke WebP
         foreach ($req->file('foto') as $index => $foto) {
-            $path = $foto->store('foto_lelang', 'public');
+            $image = $manager->decodePath($foto->getPathname());
+            $encoded = $image->encode(new WebpEncoder(quality: 85));
+            $filename = 'foto_lelang/'.Str::random(40).'.webp';
+
+            Storage::disk('public')->put($filename, $encoded->toString());
+
             M_FotoLelang::create([
                 'lelang_id' => $lelang->id,
-                'path_foto' => $path,
+                'path_foto' => $filename,
                 'urutan' => $index,
             ]);
         }
