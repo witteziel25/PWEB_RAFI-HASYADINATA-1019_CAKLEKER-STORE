@@ -1,56 +1,108 @@
 # Cakleker Auction
 
-**Cakleker Auction** adalah platform lelang mobil *supercar* berbasis web profesional. Aplikasi ini memungkinkan kolektor untuk mencari dan menawar (*bidding*) mobil impian mereka, atau bahkan mendaftar sebagai penjual untuk melelang koleksi pribadinya.
+Cakleker Auction is a web-based online auction platform specifically designed for Ferrari car collections. The system facilitates seamless interactions between sellers and buyers through a secure, real-time bidding mechanism.
 
----
+## Features
 
-## Fitur Unggulan
+*   **User Authentication and Authorization**
+    *   Secure user registration and login system.
+    *   Password reset mechanism utilizing OTP (One-Time Password) sent via email.
+    *   Profile management including avatar uploads.
+*   **Auction Management**
+    *   Sellers can create new auctions with detailed specifications using a rich text editor (CKEditor).
+    *   Support for multiple image uploads per auction, automatically optimized and converted to WebP format.
+    *   Interactive map integration (Leaflet & OpenStreetMap) for precise Cash On Delivery (COD) location tagging.
+    *   Ability to cancel auctions before any bids are placed.
+*   **Bidding System**
+    *   Real-time bid submission using asynchronous AJAX requests.
+    *   Automatic validation to ensure bids exceed the current highest offer.
+    *   Clear indication of the highest bidder and transaction history.
+*   **Dashboards**
+    *   **Public Dashboard**: Displays all active public auctions and the user's personal bidding history.
+    *   **Personal Dashboard**: Allows users to manage their created auctions, track active listings, and review completed sales.
+*   **User Interface**
+    *   Responsive and modern design built with Bootstrap 5.
+    *   Built-in Dark Mode and Light Mode toggle with local storage persistence.
 
-1. **Sistem Otentikasi & Keamanan Ketat**
-   - Registrasi pengguna baru.
-   - Verifikasi email via OTP (One-Time Password) 6-digit.
-   - Login dengan validasi kredensial (Hanya *Username* & Kata Sandi).
-   - Pemulihan akun (Lupa Kata Sandi) melalui *email reset link*.
+## Technology Stack
 
-2. **Manajemen Akun Terintegrasi**
-   - Pengaturan informasi profil pribadi.
-   - Pengunggahan foto profil dengan optimisasi gambar otomatis.
+*   **Backend Framework**: Laravel (PHP)
+*   **Database**: MySQL
+*   **Frontend**: HTML5, CSS3, JavaScript, Bootstrap 5
+*   **Image Processing**: Intervention Image (GD Driver)
+*   **Rich Text Editor**: CKEditor 5
+*   **Mapping Service**: Leaflet JS & Nominatim (OpenStreetMap)
 
-3. **Dasbor Penjual (Lelang Pribadi)**
-   - Form pembuatan lelang yang interaktif (Judul, Harga Awal, Titik Lokasi COD, Rentang Waktu Pelaksanaan).
-   - Editor Teks Kaya (Rich Text/CKEditor) untuk penulisan spesifikasi kendaraan.
-   - Unggah hingga maksimal 5 lembar foto pameran mobil.
-   - Pemantauan tawaran aktif secara langsung.
-   - Manajemen riwayat lelang yang telah usai (Terjual / Tidak Terjual).
+## System Requirements
 
-4. **Sistem Penawaran (Bidding System)**
-   - Daftar Lelang Umum yang menampilkan seluruh lelang yang sedang berlangsung.
-   - Validasi angka *bidding* agar tawaran selalu melampaui harga puncak saat ini.
-   - Format mata uang Rupiah dinamis saat mengetik angka nominal tawaran.
-   - Detail informasi kontak pemenang di sesi pelelangan yang sukses diselesaikan.
+Ensure your server or local environment meets the following requirements:
+*   PHP >= 8.1
+*   Composer
+*   MySQL or MariaDB
+*   Node.js and NPM (optional, for frontend asset compilation)
+*   GD PHP Extension (required for image processing)
 
-5. **Pengalaman Antarmuka yang Nyaman**
-   - Mode Gelap / Mode Terang (*Dark/Light Mode Toggle*) di seluruh platform web.
-   - Kartu daftar lelang yang rapi dengan efek interaktif.
+## Installation Guide
 
-6. **Optimisasi Sisi Server**
-   - Konversi dan kompresi file gambar yang diunggah ke format `WebP` berkualitas tinggi menggunakan pustaka *Intervention Image*, untuk kecepatan memuat data halaman.
-   - Pembatasan batas kapasitas berkas unggah maksimal 2 MB per foto.
+Follow these steps to set up the project locally:
 
----
+1.  **Clone the Repository**
+    Clone the project into your local server directory (e.g., inside Laragon, XAMPP, or Valet).
 
-## Tech Stack
+2.  **Install Dependencies**
+    Navigate to the project directory and run Composer to install PHP dependencies.
+    ```bash
+    composer install
+    ```
 
-Aplikasi ini dibangun menggunakan beberapa teknologi berikut:
+3.  **Environment Configuration**
+    Copy the example environment file and configure it according to your database setup.
+    ```bash
+    cp .env.example .env
+    ```
+    Open the `.env` file and update the database credentials:
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=cakleker_auction
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
+    Also, configure your SMTP settings for the OTP email functionality to work properly.
 
-- **Bahasa Pemrograman**: PHP (v8.2+)
-- **Kerangka Kerja (Backend)**: [Laravel 11.x](https://laravel.com/)
-- **Kerangka Kerja (Frontend)**: [Bootstrap 5.3](https://getbootstrap.com/)
-- **Mesin Tampilan**: Blade Template Engine
-- **Basis Data**: MySQL
-- **Pengolah Gambar**: [Intervention Image v4](https://image.intervention.io/)
+4.  **Generate Application Key**
+    Generate a secure application key for Laravel.
+    ```bash
+    php artisan key:generate
+    ```
 
----
+5.  **Run Database Migrations**
+    Run the migrations to create the required tables in your database.
+    ```bash
+    php artisan migrate
+    ```
 
-## 📜 Lisensi
-Aplikasi ini dibangun menggunakan kerangka kerja [Laravel](https://laravel.com/docs/11.x/license). Lisensi proyek ini tunduk pada Lisensi MIT (MIT License). Anda bebas memodifikasi, dan menggunakan kembali kerangka sumber kode dalam platform ini.
+6.  **Create Storage Link**
+    Create a symbolic link to ensure uploaded images are publicly accessible.
+    ```bash
+    php artisan storage:link
+    ```
+
+7.  **Run the Application**
+    Start the local development server.
+    ```bash
+    php artisan serve
+    ```
+    The application will be accessible at `http://localhost:8000`.
+
+## Directory Structure Highlights
+
+*   `app/Http/Controllers/`: Contains the application's business logic (e.g., `C_Lelang.php`, `C_Akun.php`, `C_Penawaran.php`).
+*   `app/Models/`: Eloquent ORM models representing database tables.
+*   `resources/views/`: Blade templates for the user interface.
+*   `routes/web.php`: Defines the web routes and middleware protections.
+
+## License
+
+This project is proprietary and intended for specific deployment. Unauthorized copying or distribution of this codebase is prohibited.

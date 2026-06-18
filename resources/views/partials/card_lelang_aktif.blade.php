@@ -94,6 +94,7 @@
         </div>
     </div>
 </div>
+</div>
 @empty
 <div class="alert alert-info">Belum ada lelang umum aktif saat ini.</div>
 @endforelse
@@ -104,86 +105,3 @@
 </div>
 @endif
 
-@push('scripts')
-<script>
-    // Event untuk menampilkan form penawaran saat klik "Ikuti lelang"
-    document.querySelectorAll('.btn-ikuti').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const lelangId = this.dataset.lelangId;
-            const formDiv = document.getElementById('formPenawaran' + lelangId);
-            if (formDiv.style.display === 'none') {
-                formDiv.style.display = 'block';
-                this.textContent = 'Tutup';
-            } else {
-                formDiv.style.display = 'none';
-                this.textContent = 'Ikuti lelang';
-            }
-        });
-    });
-
-    // Proses AJAX submit penawaran
-    document.querySelectorAll('.form-penawaran').forEach(form => {
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const lelangId = this.dataset.lelangId;
-            const formWrapper = this.closest('.form-penawaran');
-            const hargaInputHidden = formWrapper.querySelector('input[name="harga_tawar"]');
-            const hargaTampil = formWrapper.querySelector('.format-rupiah');
-            
-            // if input manually not triggered
-            if(hargaTampil.value) {
-                hargaInputHidden.value = hargaTampil.value.replace(/\./g, '');
-            }
-            
-            const harga = hargaInputHidden.value;
-            const csrf = document.querySelector('meta[name="csrf-token"]').content;
-
-            try {
-                const response = await fetch(`/penawaran/${lelangId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': csrf
-                    },
-                    body: JSON.stringify({ harga_tawar: harga })
-                });
-                const result = await response.json();
-                if (result.success) {
-                    alert(result.message);
-                    // Reload halaman agar data terbaru
-                    location.reload();
-                } else {
-                    alert(result.error || 'Gagal membuat penawaran');
-                }
-            } catch (err) {
-                alert('Terjadi kesalahan server');
-            }
-        });
-    });
-
-    // Format Rupiah formatter attached to body for dynamically added elements
-    document.body.addEventListener('keyup', function(e) {
-        if (e.target && e.target.classList.contains('format-rupiah')) {
-            e.target.value = formatRupiah(e.target.value);
-            const hiddenInput = e.target.closest('.d-flex').querySelector('input[name="harga_tawar"]');
-            if (hiddenInput) {
-                hiddenInput.value = e.target.value.replace(/\./g, '');
-            }
-        }
-    });
-
-    function formatRupiah(angka) {
-        let number_string = angka.replace(/[^,\d]/g, '').toString(),
-            split   = number_string.split(','),
-            sisa    = split[0].length % 3,
-            rupiah  = split[0].substr(0, sisa),
-            ribuan  = split[0].substr(sisa).match(/\d{3}/gi);
-            
-        if (ribuan) {
-            let separator = sisa ? '.' : '';
-            rupiah += separator + ribuan.join('.');
-        }
-        return rupiah;
-    }
-</script>
-@endpush

@@ -22,12 +22,14 @@ class C_Lelang extends Controller
         $lelangAktif = M_Lelang::where('is_active', true)
             ->where('waktu_berakhir', '>', now())
             ->when($search, fn ($q) => $q->where('judul', 'like', "%$search%"))
+            ->orderBy('created_at', 'desc')
             ->get();
 
         // Riwayat lelang umum: lelang yang sudah berakhir dan user pernah menawar
         $riwayat = M_Lelang::where('waktu_berakhir', '<=', now())
             ->whereHas('penawaran', fn ($q) => $q->where('pembeli_id', $user->id))
             ->when($search, fn ($q) => $q->where('judul', 'like', "%$search%"))
+            ->orderBy('waktu_berakhir', 'desc')
             ->get();
 
         return view('V_LelangUmum', compact('lelangAktif', 'riwayat', 'search'));
@@ -42,6 +44,7 @@ class C_Lelang extends Controller
             ->where('is_active', true)
             ->where('waktu_berakhir', '>', now())
             ->when($search, fn ($q) => $q->where('judul', 'like', "%$search%"))
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $riwayatSaya = M_Lelang::where('penjual_id', $user->id)
@@ -50,6 +53,7 @@ class C_Lelang extends Controller
                     ->orWhere('is_active', false);
             })
             ->when($search, fn ($q) => $q->where('judul', 'like', "%$search%"))
+            ->orderBy('waktu_berakhir', 'desc')
             ->get();
 
         return view('V_LelangPribadi', compact('lelangAktifSaya', 'riwayatSaya', 'search'));

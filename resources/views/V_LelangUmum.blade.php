@@ -66,6 +66,20 @@
 
     // Melampirkan event handler submit penawaran pada kartu lelang yang baru dimuat
     function attachBidEvents() {
+        document.querySelectorAll('.btn-ikuti').forEach(btn => {
+            btn.onclick = function() {
+                const lelangId = this.dataset.lelangId;
+                const formDiv = document.getElementById('formPenawaran' + lelangId);
+                if (formDiv.style.display === 'none' || formDiv.style.display === '') {
+                    formDiv.style.display = 'block';
+                    this.textContent = 'Tutup';
+                } else {
+                    formDiv.style.display = 'none';
+                    this.textContent = 'Ikuti';
+                }
+            };
+        });
+
         document.querySelectorAll('.form-penawaran').forEach(form => {
             form.onsubmit = async function(e) {
                 e.preventDefault();
@@ -119,6 +133,31 @@
 
     // Inisialisasi awal saat halaman pertama kali dibuka
     attachBidEvents();
+
+    // Format Rupiah formatter attached to body for dynamically added elements
+    document.body.addEventListener('keyup', function(e) {
+        if (e.target && e.target.classList.contains('format-rupiah')) {
+            e.target.value = formatRupiah(e.target.value);
+            const hiddenInput = e.target.closest('.d-flex').querySelector('input[name="harga_tawar"]');
+            if (hiddenInput) {
+                hiddenInput.value = e.target.value.replace(/\./g, '');
+            }
+        }
+    });
+
+    function formatRupiah(angka) {
+        let number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split   = number_string.split(','),
+            sisa    = split[0].length % 3,
+            rupiah  = split[0].substr(0, sisa),
+            ribuan  = split[0].substr(sisa).match(/\d{3}/gi);
+            
+        if (ribuan) {
+            let separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+        return rupiah;
+    }
 </script>
 @endpush
 @endsection
