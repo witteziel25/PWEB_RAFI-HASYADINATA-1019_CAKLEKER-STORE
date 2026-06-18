@@ -1,4 +1,4 @@
-# Cakleker Auction (Versi Bahasa Indonesia)
+# Cakleker Auction
 
 Cakleker Auction adalah platform lelang daring berbasis web yang dirancang khusus untuk koleksi mobil Ferrari. Sistem ini memfasilitasi interaksi yang lancar antara penjual dan pembeli melalui mekanisme penawaran harga yang aman dan seketika (real-time).
 
