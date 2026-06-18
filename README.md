@@ -2,7 +2,7 @@ RAFI HASYADINATA - 242410101019 - PEMROGRAMAN BERBASIS WEB A
 
 Hasil pengerjaan tugas akhir ada pada branch cakleker-auction
 
-<img width="496" height="427" alt="image" src="https://github.com/user-attachments/assets/93269e1a-4f27-40c8-ade6-666e36ff6cc3" />
+<img width="862" height="857" alt="image" src="https://github.com/user-attachments/assets/4dbe065f-1985-43e2-992d-db53ba35bb03" />
 
 Hasil pengerjaan tugas Aktivitas Mandiri 1 dan 2 Laravel ada pada branch new-cakleker-store.
 
